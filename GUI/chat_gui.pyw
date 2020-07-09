@@ -1,5 +1,6 @@
 from threading import Thread
-from tkinter import Tk, Label, Entry, Text, END
+from tkinter import *
+from tkinter.ttk import *
 from ChatServerClient import client
 
 
