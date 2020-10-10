@@ -44,7 +44,7 @@ if __name__ == '__main__':
     thread.start()
 
     window = Tk()
-    window.title('Chat')
+    window.title('Chat Test')
     window.resizable(0, 0)
     window.protocol("WM_DELETE_WINDOW", close_window)
     window.bind('<Escape>', lambda event: close_window())
