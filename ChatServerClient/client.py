@@ -2,7 +2,7 @@ import socket
 
 PORT = 5050
 FORMAT = 'utf-8'
-SERVER = '127.0.0.1'
+SERVER = '192.168.0.115'
 ADDR = (SERVER, PORT)
 MAX = 1024
 

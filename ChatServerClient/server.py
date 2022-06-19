@@ -1,8 +1,8 @@
+import asyncio
 import socket
-from threading import Thread
 
 
-def handle(conn, addr):
+async def handle(conn):
     connected = True
     while connected:
         msg = conn.recv(MAX).decode(FORMAT)
@@ -23,23 +23,28 @@ def send_all(message):
         con.send(message)
 
 
-def start():
+async def start(server):
     server.listen()
     while True:
         conn, addr = server.accept()
         conns.append(conn)
-        thread = Thread(target=handle, args=(conn, addr))
-        thread.start()
+        await handle(conn)
+        # thread = Thread(target=handle, args=(conn,))
+        # thread.start()
+
+
+async def main():
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
+        server.bind(ADDR)
+        await start(server)
 
 
 if __name__ == '__main__':
-    SERVER = '127.0.0.1'
+    SERVER = '192.168.0.115'
     PORT = 5050
     ADDR = (SERVER, PORT)
     MAX = 1024
     FORMAT = 'utf-8'
     conns = []
 
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.bind(ADDR)
-    start()
+    asyncio.run(main())
